@@ -6,15 +6,15 @@
 <title>Szómegfejtő</title>
 <style>
   :root {
-    --paper: #f2ede2;
+    --paper: #f5f2eb;
     --ink: #23201b;
     --ink-soft: #5c564a;
     --rule: #c9bfa8;
-    --accent: #8a4a2b;
-    --accent-soft: #e4d3bd;
+    --accent: #2b0202;
+    --accent-soft: #d2dbce;
     --cell-empty: #ffffff;
-    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-    --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    --mono: "Segoe UI", "Roboto", Arial, sans-serif;
+    --serif: "Segoe UI", "Roboto", Arial, sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -33,12 +33,12 @@
   }
 
   h1 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 2.1rem;
-    margin: 0 0 36px;
-    letter-spacing: -0.01em;
-    text-align: center;
+	font-family: var(--serif);
+	font-weight: 600;
+	font-size: 2.1rem;
+	margin: 0 0 36px;
+	letter-spacing: -0.01em;
+	text-align: right;
   }
 
   .card {
@@ -66,7 +66,8 @@
 
   .pattern-row {
     display: flex;
-    gap: 8px;
+	justify-content: center;  
+    gap: 12px;
     flex-wrap: wrap;
   }
 
@@ -132,9 +133,10 @@
   }
 
   .divider {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 34px 0;
+	border: none;
+	border-top: 1px solid var(--rule);
+	margin: 34px 0;
+	text-align: center;
   }
 
   /* Starter word section */
@@ -153,41 +155,41 @@
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 10px 14px;
+    gap: 10px;
+    padding: 12px 14px;
     cursor: pointer;
   }
   .starter-item summary::-webkit-details-marker { display: none; }
   .starter-item .rank {
     font-family: var(--mono);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--ink-soft);
-    width: 18px;
+    width: 20px;
     flex-shrink: 0;
   }
   .starter-item .word {
     font-family: var(--mono);
     font-size: 1.05rem;
     font-weight: 600;
-    min-width: 90px;
+    min-width: 60px;
   }
   .starter-item .pct {
     font-family: var(--mono);
     font-size: 0.95rem;
     color: var(--accent);
     font-weight: 600;
-    min-width: 52px;
+    min-width: 20px;
     text-align: right;
   }
   .starter-item .bar-track {
     flex: 1;
     height: 8px;
     background: var(--accent-soft);
-    border-radius: 4px;
+    border-radius: px;
     overflow: hidden;
   }
   .starter-item .bar-fill {
-    height: 100%;
+    height: 20%;
     background: var(--accent);
   }
   .starter-item .use-btn {
@@ -196,7 +198,7 @@
     background: var(--ink);
     color: var(--paper);
     border: none;
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 2px;
     cursor: pointer;
     white-space: nowrap;
@@ -266,32 +268,40 @@
     font-style: italic;
     margin-top: 8px;
   }
+	#resetPatternBtn {
+    display: block;
+    margin: 20px auto 20px auto !important;
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <h1>Szómegfejtő</h1>
+  <h1>Szókereső</h1>
 
   <div class="card">
     <div class="field">
-      <label><b>Top 5 kezdőszó javaslat</b> &mdash; öt különböző, leggyakrabban előforduló betűt tartalmazó szavak</label>
+      <p style="text-align: center;"><b>Kezdőszó javaslat</b> – A leggyakrabban előforduló betűt tartalmazó szavak</p>
       <div class="starter-list" id="starterList"></div>
-      <div class="hint">A % azt mutatja, a szó öt betűje átlagosan a szavak hány százalékában fordul elő &mdash; minél magasabb, annál több szót zár ki egy első tipp. Kattints egy szóra a jelentéséért.</div>
+      <div class="hint">
+        <p style="text-align: center;">A % érték azt mutatja meg, hogy a szó öt betűje átlagosan a szavak hány százalékában fordul elő.</p>
+      </div>
     </div>
     <hr class="divider">
     <div class="field">
-      <label>Leggyakoribb betűk az 5 betűs szavakban (hány szóban fordulnak elő)</label>
+     <p style="text-align: center;"><strong>Leggyakoribb betűk az 5 betűs szavakban</strong> (hány szóban fordulnak elő)</p>
       <div class="freq-row" id="freqRow"></div>
     </div>
   </div>
 
   <div class="card">
     <div class="field">
-      <label><b>Ismert pozíciók</b> &mdash; hagyd üresen, ami nem ismert</label>
-      <div class="pattern-row" id="patternRow"></div>
-    </div>
-  </div>
+     	<p style="text-align: center;"><b>Ismert pozíciók</b> &mdash; hagyd üresen, ami nem ismert</p>
+     	<div class="pattern-row" id="patternRow"></div>
+		
+<!-- ÚJ RESET GOMB -->
+<button type="button" id="resetPatternBtn" onclick="const cells = document.querySelectorAll('#patternRow .letter-cell'); cells.forEach(c => c.value = ''); const first = document.querySelector('#patternRow [data-idx=\'0\']'); if (first) first.focus(); if (typeof runSearch === 'function') runSearch();" style="padding: 8px 16px; background-color: var(--accent); color: var(--paper); border: none; border-radius: 4px; cursor: pointer; font-family: var(--serif); font-weight: bold;">Pozíciók törlése</button>
+
 
   <div class="card">
     <div class="field">
@@ -307,7 +317,7 @@
   </div>
 
   <div class="results-head">
-    <h2>Találatok</h2>
+    <h2>Találatok:</h2>
     <span class="count" id="resultCount">&mdash;</span>
   </div>
   <div class="results-list" id="results"></div>
@@ -455,10 +465,23 @@ function buildPatternRow() {
 
 excludeInput.addEventListener('input', runSearch);
 includeInput.addEventListener('input', runSearch);
-
+	
+//keresési funkció
+	
 function runSearch() {
   const cells = Array.from(patternRow.querySelectorAll('.letter-cell'));
   const patternTokens = cells.map(c => c.value.trim().toLowerCase());
+
+  // --- ÚJ ELLENŐRZÉS: Megnézzük, van-e legalább egy beírt betű ---
+  const vanBeirtBetu = patternTokens.some(token => token !== '');
+
+  if (!vanBeirtBetu) {
+    // Ha egyetlen box sincs kitöltve, kiürítjük a találati listát és a számlálót
+    resultCountEl.textContent = 'Kezdje meg a keresést';
+    resultsEl.innerHTML = '';
+    return; // Itt megállítjuk a függvényt, így nem fut le a keresés
+  }
+  // --- ÚJ ELLENŐRZÉS VÉGE ---
 
   const excludeSet = new Set(tokenize(excludeInput.value.toLowerCase()).filter(t => t.trim()));
   const includeSet = new Set(tokenize(includeInput.value.toLowerCase()).filter(t => t.trim()));
@@ -529,6 +552,7 @@ function runSearch() {
     resultsEl.appendChild(more);
   }
 }
+
 
 // --- Betűgyakoriság és kezdőszó javaslatok ---
 function computeFrequencyAndStarters() {
