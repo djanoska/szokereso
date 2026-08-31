@@ -47,6 +47,7 @@
     border: 1px solid var(--rule);
     border-radius: 20px;
     padding: 28px;
+	margin-top: 28px;
     margin-bottom: 28px;
   }
 
@@ -145,6 +146,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+	margin-bottom: auto;
   }
   .starter-item {
     border: 1px solid var(--rule);
@@ -236,6 +238,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+	margin-bottom: auto;
   }
   .result-item {
     border: 1px solid var(--rule);
@@ -280,31 +283,17 @@
 
   <h1>Szókereső</h1>
 
-  <div class="card">
-    <div class="field">
-      <p style="text-align: center;"><b>Kezdőszó javaslat</b> – A leggyakrabban előforduló betűt tartalmazó szavak</p>
-      <div class="starter-list" id="starterList"></div>
-      <div class="hint">
-        <p style="text-align: center;">A % érték azt mutatja meg, hogy a szó öt betűje átlagosan a szavak hány százalékában fordul elő.</p>
-      </div>
-    </div>
-    <hr class="divider">
-    <div class="field">
-     <p style="text-align: center;"><strong>Leggyakoribb betűk az 5 betűs szavakban</strong> (hány szóban fordulnak elő)</p>
-      <div class="freq-row" id="freqRow"></div>
-    </div>
-  </div>
-
-  <div class="card">
+<div class="card">
     <div class="field">
      	<p style="text-align: center;"><b>Ismert pozíciók</b> &mdash; hagyd üresen, ami nem ismert</p>
      	<div class="pattern-row" id="patternRow"></div>
 		
-<!-- ÚJ RESET GOMB -->
-<button type="button" id="resetPatternBtn" onclick="const cells = document.querySelectorAll('#patternRow .letter-cell'); cells.forEach(c => c.value = ''); const first = document.querySelector('#patternRow [data-idx=\'0\']'); if (first) first.focus(); if (typeof runSearch === 'function') runSearch();" style="padding: 8px 16px; background-color: var(--accent); color: var(--paper); border: none; border-radius: 4px; cursor: pointer; font-family: var(--serif); font-weight: bold;">Pozíciók törlése</button>
+		<!-- ÚJ RESET GOMB -->
+		<button type="button" id="resetPatternBtn" onclick="const cells = document.querySelectorAll('#patternRow .letter-cell'); cells.forEach(c => c.value = ''); const first = document.querySelector('#patternRow [data-idx=\'0\']'); if (first) first.focus(); if (typeof runSearch === 'function') runSearch();" style="padding: 8px 16px; background-color: var(--accent); color: var(--paper); border: none; border-radius: 4px; cursor: pointer; font-family: var(--serif); font-weight: bold;">Pozíciók törlése</button>
 		</div>
 	</div>
-  <div class="card">
+	
+	<div class="card">
     <div class="field">
       <label><b>Tiltott betűk</b> (amik biztosan nincsenek a szóban)</label>
       <input type="text" id="excludeInput" placeholder="pl. cs ny sz e t o l a c m">
@@ -317,11 +306,29 @@
     </div>
   </div>
 
-  <div class="results-head">
+	  <div class="results-head">
     <h2>Találatok:</h2>
     <span class="count" id="resultCount">&mdash;</span>
   </div>
   <div class="results-list" id="results"></div>
+	
+	
+  <div class="card">
+    <div class="field">
+      <p style="text-align: center;"><b>Kezdőszó javaslat</b> – A leggyakrabban előforduló betűt tartalmazó szavak</p>
+		
+		    <hr class="divider">
+    <div class="field">
+     <p style="text-align: center;"><strong>Leggyakoribb betűk az 5 betűs szavakban</strong> (hány szóban fordulnak elő)</p>
+      <div class="freq-row" id="freqRow"></div>
+    </div>
+  </div>
+		
+      <div class="starter-list" id="starterList"></div>
+      <div class="hint">
+        <p style="text-align: center;">A % érték azt mutatja meg, hogy a szó öt betűje átlagosan a szavak hány százalékában fordul elő.</p>
+      </div>
+    </div>
 
 </div>
 
