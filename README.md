@@ -1,4 +1,4 @@
-# szozat
+# Szókereső
 
 This is an AI-written tool.
 
