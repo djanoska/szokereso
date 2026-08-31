@@ -53,6 +53,9 @@
 
   .field {
     margin-bottom: 22px;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
   }
   .field:last-child { margin-bottom: 0; }
 
@@ -62,6 +65,7 @@
     color: var(--ink-soft);
     margin-bottom: 8px;
     line-height: 1.4;
+	text-align: center;
   }
 
   label b { color: var(--ink); font-weight: 600; }
@@ -146,7 +150,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-	margin-bottom: auto;
+	margin-bottom: 15px;
+	min-height: 0;
   }
   .starter-item {
     border: 1px solid var(--rule);
@@ -221,7 +226,8 @@
   .freq-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+	justify-content: center;
+    gap: 10px;
     margin-top: 4px;
   }
   .freq-chip {
@@ -285,7 +291,7 @@
 
 <div class="card">
     <div class="field">
-     	<p style="text-align: center;"><b>Ismert pozíciók</b> &mdash; hagyd üresen, ami nem ismert</p>
+     	<p style="text-align: center;"><b>Ismert pozíciók</b><br>hagyd üresen, ami nem ismert</p>
      	<div class="pattern-row" id="patternRow"></div>
 		
 		<!-- ÚJ RESET GOMB -->
@@ -295,13 +301,13 @@
 	
 	<div class="card">
     <div class="field">
-      <label><b>Tiltott betűk</b> (amik biztosan nincsenek a szóban)</label>
+      <label><b>Tiltott betűk</b><br>(amik biztosan nincsenek a szóban)</label>
       <input type="text" id="excludeInput" placeholder="pl. cs ny sz e t o l a c m">
       <div class="hint">Betűnként szóközzel vagy egybe is beírhatod, a program magyar betűkre bontja.</div>
     </div>
     <hr class="divider" style="margin:22px 0;">
     <div class="field">
-      <label><b>Kötelező betűk</b> &mdash; opcionális (a szóban szerepelnie kell, de a pozíciója nem ismert)</label>
+      <label><b>Kötelező betűk</b><br>opcionális (a szóban szerepelnie kell, de a pozíciója nem ismert)</label>
       <input type="text" id="includeInput" placeholder="pl. v k">
     </div>
   </div>
@@ -315,21 +321,31 @@
 	
   <div class="card">
     <div class="field">
-      <p style="text-align: center;"><b>Kezdőszó javaslat</b> – A leggyakrabban előforduló betűt tartalmazó szavak</p>
+      <!--<p style="text-align: center;"><b>Kezdőszó javaslat</b><br>A leggyakrabban előforduló betűt tartalmazó szavak</p>-->
 		
-		    <hr class="divider">
+	<hr class="divider" style="margin: 0px 0;">
+		
     <div class="field">
-     <p style="text-align: center;"><strong>Leggyakoribb betűk az 5 betűs szavakban</strong> (hány szóban fordulnak elő)</p>
+     <p style="text-align: center;"><strong>Leggyakoribb betűk és szavak a játékban.</strong><br>Százalékos előfordulása a szavakban</p>
       <div class="freq-row" id="freqRow"></div>
     </div>
   </div>
 		
       <div class="starter-list" id="starterList"></div>
       <div class="hint">
-        <p style="text-align: center;">A % érték azt mutatja meg, hogy a szó öt betűje átlagosan a szavak hány százalékában fordul elő.</p>
+        <p style="text-align: center;">A százalékos érték azt mutatja meg, hogy a szó öt betűje átlagosan a szavak hány százalékában fordul elő.</p>
       </div>
     </div>
-
+	
+	<div class="card">
+		<p style="text-align: justify;">A projekt célja annak bemutatása, hogy AI segítségével HTML-ismeretek nélkül létrehozható egy működő webalkalmazás.<br><br>
+		A projekt során a fejlesztési folyamatban az AI kapott kiemelt szerepet: az ötlettől és a funkciók meghatározásától kezdve a HTML, CSS és JavaScript kód létrehozásán és finomításán át egészen a hibakeresésig.<br><br>
+		A cél nem egy professzionális fejlesztői megoldás létrehozása volt, hanem annak tesztelése, hogy megfelelő specifikációval és iteratív AI-használattal meddig lehet eljutni előzetes HTML-programozási ismeretek nélkül.</p>
+	</div>	
+	
+	<p style="text-align: right;">
+	Verzió: v1.3
+	</p>
 </div>
 
 <script>
